@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema Veterinaria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <h1>🐾 Sistema Veterinaria Anubis</h1>
+    <hr style="border:1px solid #d4af37;">
+
+    <nav class="menu">
+        <a href="{{ url_for('index') }}"></a>
+        <a href="{{ url_for('dueños') }}"></a>
+        <a href="{{ url_for('mascotas') }}"></a>
+        <a href="{{ url_for('historia') }}"></a>
+        <a href="{{ url_for('ver_historias') }}"></a>
+        <a href="{{ url_for('tratamiento') }}"></a>
+        <a href="{{ url_for('ver_tratamientos') }}"></a>
+    </nav>
+
+    <hr style="border:1px solid #d4af37; margin-bottom:20px;">
+
+    {% block content %}{% endblock %}
+
+</div>
+
+</body>
+</html>

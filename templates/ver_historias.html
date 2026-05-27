@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Historias Clínicas</h2>
+
+<ul>
+{% for h in historias %}
+  <li>
+    {{ h.hc_numero }} - {{ h.paciente }}
+
+    <a href="{{ url_for('generar_pdf', id=h.id) }}">
+      <button type="button">Descargar PDF</button>
+    </a>
+
+  </li>
+{% endfor %}
+</ul>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

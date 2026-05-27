@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Historial de Mascota</h2>
+
+<h3>{{ mascota.nombre }}</h3>
+
+<p><b>Dueño:</b> {{ dueño.nombre }}</p>
+<p><b>Especie:</b> {{ mascota.especie }}</p>
+<p><b>Raza:</b> {{ mascota.raza }}</p>
+
+<hr>
+
+<h3>Historias Clínicas</h3>
+
+{% for h in historias %}
+
+{% for h in historias %}
+
+<div class="card" style="margin-bottom:15px; padding:10px; border:1px solid #ccc;">
+    
+    <p><b>Fecha:</b> {{ h.fecha }}</p>
+    <p><b>Diagnóstico:</b> {{ h.diagnostico }}</p>
+    <p><b>Tratamiento:</b> {{ h.tratamiento }}</p>
+
+    <!-- BOTÓN PDF -->
+    <a href="{{ url_for('generar_pdf', id=h.id) }}" 
+       style="background:red; color:white; padding:8px 12px; text-decoration:none; border-radius:5px;">
+        Descargar PDF
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endfor %}
+
+<hr>
+
+<h3>Vacunas / Tratamientos</h3>
+
+{% for t in tratamientos %}
+
+<div style="border:1px solid #d4af37; padding:10px; margin-bottom:10px">
+
+<p><b>Tipo:</b> {{ t.tipo }}</p>
+
+<p><b>Nombre:</b> {{ t.nombre }}</p>
+
+<p><b>Fecha:</b> {{ t.fecha }}</p>
+
+<p><b>Próxima:</b> {{ t.proxima }}</p>
+
+<p><b>Observaciones:</b> {{ t.observaciones }}</p>
+
+</div>
+
+{% endfor %}
+
+<br>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

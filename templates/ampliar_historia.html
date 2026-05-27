@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-wrapper">
+
+    <h2>Ampliar Historia Clínica</h2>
+
+    <form method="POST">
+
+        <div class="campo">
+            <label>Nueva evolución</label>
+
+            <textarea
+                name="descripcion"
+                rows="8"
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit" class="btn-principal">
+            Guardar Evolución
+        </button>
+
+    </form>
+
+</div>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

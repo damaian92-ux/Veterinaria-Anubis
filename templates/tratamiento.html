@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="main-container">
+
+<h2>Vacunas / Desparasitación</h2>
+
+<form method="POST">
+
+  <div class="campo">
+    <label>Tipo</label>
+    <select name="tipo" required>
+      <option value="">Seleccione una opción</option>
+      <option value="Vacuna">Vacuna</option>
+      <option value="Desparasitación">Desparasitación</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label>Nombre del tratamiento</label>
+    <input type="text" name="nombre" required>
+  </div>
+
+  <div class="campo">
+    <label>Fecha aplicada</label>
+    <input type="date" name="fecha" required>
+  </div>
+
+  <div class="campo">
+    <label>Próxima dosis</label>
+    <input type="date" name="proxima">
+  </div>
+
+  <div class="campo">
+    <label>Mascota</label>
+    <select name="mascota_id" required>
+      <option value="">Seleccione una mascota</option>
+      {% for m in mascotas %}
+        <option value="{{ m.id }}">{{ m.nombre }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="campo">
+    <label>Observaciones</label>
+    <textarea name="observaciones" rows="3"></textarea>
+  </div>
+
+  <button>Guardar Tratamiento</button>
+
+</form>
+
+</div>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

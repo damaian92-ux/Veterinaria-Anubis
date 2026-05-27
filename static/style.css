@@ -1,0 +1,166 @@
+/* Fondo general */
+body {
+    background-color: #000;
+    color: #d4af37;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contenedor central */
+.main-container {
+    width: 90%;
+    max-width: 900px;
+    background-color: #111;
+    padding: 40px;
+    border-radius: 12px;
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Títulos */
+h1, h2, h3 {
+    text-align: center;
+    color: #d4af37;
+}
+
+/* Formularios */
+form {
+    margin-top: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+/* Campos de texto */
+input,
+select,
+textarea {
+    background-color: #000;
+    color: #d4af37 !important; /* fuerza color dorado */
+    border: 1px solid #d4af37;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Placeholder también dorado suave */
+input::placeholder,
+textarea::placeholder {
+    color: rgba(212, 175, 55, 0.5);
+}
+
+/* Texto seleccionado */
+input::selection,
+textarea::selection {
+    background: #d4af37;
+    color: #000;
+}
+
+/* Focus más profesional */
+input:focus,textarea:focus,select:focus {
+    outline: none;
+    border: 1px solid #f1c40f;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 8px #d4af37;
+}
+
+/* Botones */
+button {
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #f1c40f;
+}
+
+/* Listas */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #000;
+    padding: 10px;
+    margin-top: 8px;
+    border-left: 4px solid #d4af37;
+    border-radius: 6px;
+}
+
+/* Enlaces */
+a {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+/* Marca de agua */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: url("../static/logo.png") no-repeat center;
+    background-size: contain;
+    opacity: 0.05; /* intensidad marca de agua */
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Asegura que el contenido esté por encima */
+.main-container {
+    position: relative;
+    z-index: 1;
+}
+
+.form-control,
+.form-select {
+    background-color: #000 !important;
+    color: #d4af37 !important;
+}
+
+.alerta-roja{
+    background:#ffdddd;
+    border-left:6px solid red;
+    padding:8px;
+    font-weight:bold;
+}
+
+.alerta-amarilla{
+    background:#fff4cc;
+    border-left:6px solid orange;
+    padding:8px;
+    font-weight:bold;
+}
+
+.alerta-verde{
+    background:#ddffdd;
+    border-left:6px solid green;
+    padding:8px;
+}

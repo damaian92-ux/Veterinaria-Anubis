@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Vacunas y Tratamientos</h2>
+
+{% for d in datos %}
+  <div style="margin-bottom:20px; padding:15px; border:1px solid #d4af37; border-radius:8px;">
+
+    <h3>{{ d[0] }}</h3>
+
+    <p><b>Tipo:</b> {{ d[1] }}</p>
+    <p><b>Nombre:</b> {{ d[2] }}</p>
+    <p><b>Fecha aplicada:</b> {{ d[3] }}</p>
+
+    {% if d[4] %}
+      <p class="
+      {% if d[6] == 'roja' %}alerta-roja
+      {% elif d[6] == 'amarilla' %}alerta-amarilla
+      {% else %}alerta-verde{% endif %}
+      ">
+        <b>Próxima dosis:</b> {{ d[4] }}
+      </p>
+    {% else %}
+      <p><b>Próxima dosis:</b> No indicada</p>
+    {% endif %}
+
+    {% if d[5] %}
+      <p><b>Observaciones:</b> {{ d[5] }}</p>
+    {% endif %}
+
+  </div>
+{% endfor %}
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

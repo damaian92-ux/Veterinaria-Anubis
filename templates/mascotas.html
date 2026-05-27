@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Mascotas</h2>
+
+<form method="POST">
+  <input name="nombre" placeholder="Nombre" required>
+  <input name="especie" placeholder="Especie">
+  <input name="raza" placeholder="Raza">
+  <input name="edad" placeholder="Edad">
+
+  <select name="dueño_id">
+    {% for d in dueños %}
+      <option value="{{ d.id }}">{{ d.nombre }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Agregar</button>
+</form>
+
+<hr>
+
+<ul>
+{% for m in mascotas %}
+  <li>
+
+    <b>{{ m.nombre }}</b>
+
+    <a href="/historia">
+      <button>Nueva historia clínica</button>
+    </a>
+
+    <a href="/historial/{{ m.id }}">
+      <button>Ver historial</button>
+    </a>
+
+    <a href="/ampliar_historia/{{ m.id }}">
+    <button>
+        Ampliar Historia Clínica
+    </button>
+</a>
+
+  </li>
+{% endfor %}
+</ul>
+
+<br>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

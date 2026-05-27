@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Dueños</h2>
+
+<form method="POST">
+  <input name="nombre" placeholder="Nombre" required>
+  <input name="telefono" placeholder="Teléfono">
+  <input name="direccion" placeholder="Dirección">
+  <button type="submit">Agregar</button>
+</form>
+
+<ul>
+{% for d in dueños %}
+  <li>{{ d.nombre }} - {{ d.telefono }}</li>
+{% endfor %}
+</ul>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}

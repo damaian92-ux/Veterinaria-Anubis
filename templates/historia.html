@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-wrapper">
+
+  <h2 class="titulo-seccion">Nueva Historia Clínica</h2>
+
+  <form method="POST" class="form-clinica">
+
+    <div class="campo">
+      <label>HC N°</label>
+      <input type="text" name="hc_numero" value="{{ hc_numero }}" readonly>
+    </div>
+
+    <div class="campo">
+      <label>Fecha y Hora</label>
+      <input type="text" name="fecha_hora" value="{{ fecha_hora }}" readonly>
+    </div>
+
+    <div class="campo">
+    <label>Seleccionar Mascota</label>
+    <select name="mascota_id" required>
+    <option value="">Seleccione una mascota</option>
+    {% for m in mascotas %}
+    <option value="{{ m.id }}">{{ m.nombre }}</option>
+    {% endfor %}
+    </select>
+    </div>
+
+    <div class="campo">
+      <label>Propietario</label>
+      <input type="text" name="propietario" required>
+    </div>
+
+    <div class="campo">
+      <label>Dirección</label>
+      <input type="text" name="direccion">
+    </div>
+
+    <div class="campo">
+      <label>Teléfono</label>
+      <input type="text" name="telefono">
+    </div>
+
+    <div class="campo">
+      <label>Paciente</label>
+      <input type="text" name="paciente" required>
+    </div>
+
+    <div class="campo">
+      <label>Raza / Especie</label>
+      <input type="text" name="raza_especie">
+    </div>
+
+    <div class="campo">
+      <label>Fecha de Nacimiento</label>
+      <input type="date" name="fecha_nacimiento">
+    </div>
+
+    <div class="campo">
+      <label>Sexo</label>
+      <select name="sexo">
+        <option value="">Seleccione</option>
+        <option value="Macho">Macho</option>
+        <option value="Hembra">Hembra</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Color / Pelaje</label>
+      <input type="text" name="color_pelaje">
+    </div>
+
+    <div class="campo">
+      <label>Peso (kg)</label>
+      <input type="number" step="0.01" name="peso">
+    </div>
+
+    <div class="campo">
+      <label>Identificación Particular</label>
+      <input type="text" name="identificacion_particular">
+    </div>
+
+    <div class="campo">
+      <label>Dieta</label>
+      <textarea name="dieta" rows="2"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Enfermedades Previas</label>
+      <textarea name="enfermedades_previas" rows="3"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Esterilizado</label>
+      <select name="esterilizado">
+        <option value="">Seleccione</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Motivo de la consulta</label>
+      <textarea name="motivo" rows="3" required></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Diagnóstico</label>
+      <textarea name="diagnostico" rows="4" required></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Tratamiento indicado</label>
+      <textarea name="tratamiento" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn-principal">Guardar Historia</button>
+
+  </form>
+
+</div>
+
+<script id="mascotas-data" type="application/json">
+    {{ mascotas_json | tojson }}
+</script>
+
+<script>
+const mascotasData = JSON.parse(
+    document.getElementById("mascotas-data").textContent
+);
+
+const selectMascota = document.querySelector("select[name='mascota_id']");
+
+if (selectMascota) {
+
+  selectMascota.addEventListener("change", function() {
+
+      const seleccion = mascotasData.find(m => m.id == this.value);
+
+      if (seleccion) {
+          document.querySelector("input[name='propietario']").value = seleccion.dueno || "";
+          document.querySelector("input[name='direccion']").value = seleccion.direccion || "";
+          document.querySelector("input[name='telefono']").value = seleccion.telefono || "";
+          document.querySelector("input[name='paciente']").value = seleccion.nombre || "";
+          document.querySelector("input[name='raza_especie']").value =
+              (seleccion.raza || "") + " / " + (seleccion.especie || "");
+      }
+  });
+
+}
+</script>
+
+<a href="/"><button>Volver</button></a>
+
+{% endblock %}
