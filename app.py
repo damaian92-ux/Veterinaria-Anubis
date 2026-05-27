@@ -38,7 +38,9 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL:
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///veterinaria.db'
+   import os
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///veterinaria.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)

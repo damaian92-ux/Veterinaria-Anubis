@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 reportlab
 waitress
+psycopg2-binary
