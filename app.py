@@ -10,6 +10,7 @@ template_dir = os.path.join(base_path, "templates")
 static_dir = os.path.join(base_path, "static")
 
 from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask_login import (LoginManager, UserMixin, login_user, logout_user, login_required, current_user)
 from models import db, Dueño, Mascota, HistoriaClinica, Tratamiento, EvolucionClinica
 from datetime import datetime
 import os
@@ -47,19 +48,103 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-with app.app_context():
-    db.create_all()
-    print("TABLAS CREADAS")
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+
+login_manager.login_view = "login"
+
 
 with app.app_context():
     db.create_all()
+    
+    admin = Usuario.query.filter_by(usuario="admin").first()
 
+if not admin:
+
+    nuevo_admin = Usuario(
+        usuario="admin",
+        contraseña="1234"
+    )
+
+    db.session.add(nuevo_admin)
+    db.session.commit()
+
+from models import Usuario
+
+@login_manager.user_loader
+def load_user(user_id):
+
+    return Usuario.query.get(int(user_id))
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        usuario = request.form["usuario"]
+        contraseña = request.form["contraseña"]
+
+        user = Usuario.query.filter_by(
+            usuario=usuario,
+            contraseña=contraseña
+        ).first()
+
+        if user:
+
+            login_user(user)
+
+            return redirect(url_for("index"))
+
+    return render_template("login.html")
+
+@app.route("/logout")
+@login_required
+def logout():
+
+    logout_user()
+
+    return redirect(url_for("login"))
 
 # ---------------- INICIO ----------------
 
 @app.route('/')
+@login_required
 def index():
-    return render_template("index.html")
+
+    return redirect(url_for("dashboard"))
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+
+    total_mascotas = Mascota.query.count()
+
+    total_dueños = Dueño.query.count()
+
+    total_historias = HistoriaClinica.query.count()
+
+    total_tratamientos = Tratamiento.query.count()
+
+    tratamientos = Tratamiento.query.order_by(
+        Tratamiento.proxima.asc()
+    ).limit(5).all()
+
+    historias = HistoriaClinica.query.order_by(
+        HistoriaClinica.id.desc()
+    ).limit(5).all()
+
+    return render_template(
+        "dashboard.html",
+
+        total_mascotas=total_mascotas,
+        total_dueños=total_dueños,
+        total_historias=total_historias,
+        total_tratamientos=total_tratamientos,
+
+        tratamientos=tratamientos,
+        historias=historias
+    )
 
 
 # ---------------- DUEÑOS ----------------

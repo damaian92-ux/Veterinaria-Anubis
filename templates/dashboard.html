@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="titulo-dashboard">
+    Panel Administrativo
+</h1>
+
+<div class="cards-dashboard">
+
+    <div class="card-dashboard">
+        <h2>{{ total_mascotas }}</h2>
+        <p>Mascotas</p>
+    </div>
+
+    <div class="card-dashboard">
+        <h2>{{ total_dueños }}</h2>
+        <p>Dueños</p>
+    </div>
+
+    <div class="card-dashboard">
+        <h2>{{ total_historias }}</h2>
+        <p>Historias Clínicas</p>
+    </div>
+
+    <div class="card-dashboard">
+        <h2>{{ total_tratamientos }}</h2>
+        <p>Tratamientos</p>
+    </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+    <div class="panel">
+
+        <h2>Últimas historias clínicas</h2>
+
+        {% for h in historias %}
+
+        <div class="item-dashboard">
+
+            <strong>
+                {{ h.mascota.nombre }}
+            </strong>
+
+            <p>{{ h.diagnostico }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Próximos tratamientos</h2>
+
+        {% for t in tratamientos %}
+
+        <div class="item-dashboard">
+
+            <strong>
+                {{ t.mascota.nombre }}
+            </strong>
+
+            <p>{{ t.tipo }}</p>
+
+            <small>
+                {{ t.proxima }}
+            </small>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

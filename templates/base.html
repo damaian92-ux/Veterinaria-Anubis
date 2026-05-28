@@ -12,7 +12,7 @@
 
     <h1>🐾 Sistema Veterinaria Anubis</h1>
     <hr style="border:1px solid #d4af37;">
-
+{% if current_user.is_authenticated %}
     <nav class="menu">
         <a href="{{ url_for('index') }}"></a>
         <a href="{{ url_for('dueños') }}"></a>
@@ -22,10 +22,18 @@
         <a href="{{ url_for('tratamiento') }}"></a>
         <a href="{{ url_for('ver_tratamientos') }}"></a>
     </nav>
-
+{% endif %}
     <hr style="border:1px solid #d4af37; margin-bottom:20px;">
 
     {% block content %}{% endblock %}
+
+    <a href="/logout">
+    Cerrar sesión
+</a>
+
+<a href="/dashboard">
+    Dashboard
+</a>
 
 </div>
 
