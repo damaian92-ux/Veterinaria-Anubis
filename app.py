@@ -10,8 +10,8 @@ template_dir = os.path.join(base_path, "templates")
 static_dir = os.path.join(base_path, "static")
 
 from flask import Flask, render_template, request, redirect, url_for, send_file
-from flask_login import (LoginManager, UserMixin, login_user, logout_user, login_required, current_user)
-from models import db, Dueño, Mascota, HistoriaClinica, Tratamiento, EvolucionClinica
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from models import db, Dueño, Mascota, HistoriaClinica, Tratamiento, EvolucionClinica, Usuario
 from datetime import datetime
 import os
 from reportlab.pdfgen import canvas
